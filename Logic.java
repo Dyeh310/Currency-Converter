@@ -9,36 +9,36 @@ public class Logic {
 	private Currency currency;
 	private Scanner reader;
 	private boolean running;
-	private boolean check;
+	private String answer;
 
 	public Logic() {
 		this.currency = new Currency();
 		this.reader = new Scanner(System.in);
 		this.running = true;
-		this.check = true;
+		this.answer = null;
 	}
 
 	public void start() {
 		
 		//Runs until quit
 		while (running) {
-			System.out.println("Convert US dollar into which currency?");
+			System.out.println("Convert US dollar into which currency? \n");
+			
 			currency.loadMap();
-			String answer = reader.nextLine();
+			answer = reader.nextLine();
 			currency.setAnswer(answer);
 
 			// checks to make sure the value is in the map
 			if (currency.checkAnswer(currency.getAnswer()) == true) {
 				System.out.println("\n" + "How many dollars would you like converted?");
-				double amount = reader.nextDouble();
+				double amount = Double.parseDouble(reader.nextLine());
 				currency.setAmount(amount);
 				currency.multiplyCurrency(currency.getAnswer(), currency.getAmount());
 				System.out.println("");
 				System.out.println(currency);
 				
-
 			} else {
-				System.out.println("Please select a currency from the list.");
+				System.out.println("Please select a currency");
 			}
 
 		}
